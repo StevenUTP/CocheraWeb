@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro Propietario - ParqNet</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <div class="background">
+    <div class="overlay">
+      <img src="../img/logo.png" alt="Logo" class="logo" />
+      <h1>Completa tu perfil de Propietario</h1>
+
+      <form class="formulario" action="../php/propietario_registro.php" method="POST" enctype="multipart/form-data">
+        <label>Foto del DNI:</label>
+        <input type="file" name="dni" accept="image/*" required />
+        
+        <label>Foto de tu rostro:</label>
+        <input type="file" name="rostro" accept="image/*" required />
+        
+        <label>Certificado de antecedentes:</label>
+        <input type="file" name="antecedentes" accept="image/*" required />
+        
+        <label>Recibo de agua o luz:</label>
+        <input type="file" name="recibo" accept="image/*" required />
+
+        <label>Cuenta para pagos (Número o URL):</label>
+        <input type="text" name="cuenta_pago" required />
+
+        <button type="submit">Guardar perfil</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="js/validar_propietario.js"></script>
+
+</html>
