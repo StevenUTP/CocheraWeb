@@ -3,7 +3,7 @@ document.getElementById("btnConductor").addEventListener("click", function () {
 });
 
 document.getElementById("btnPropietario").addEventListener("click", function () {
-  fetch("verificar_registro_propietario.php")
+  fetch("../php/verificar_registro_propietario.php")
     .then(response => response.json())
     .then(data => {
       if (data.registrado) {

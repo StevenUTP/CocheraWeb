@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Propietario</title>
+  <link rel="stylesheet" href="../css/dashboard_propietario.css" />
+</head>
+<body>
+  <header>
+    <h1>Bienvenido, Propietario</h1>
+    <button onclick="cerrarSesion()">Cerrar sesión</button>
+  </header>
+
+  <main>
+    <section id="perfil">
+      <h2>Mi Perfil</h2>
+      <div id="info-perfil">
+        <!-- Aquí se carga con JS desde PHP -->
+      </div>
+    </section>
+
+    <section id="registro-cochera">
+      <h2>Agregar Cochera</h2>
+      <form id="form-cochera">
+        <input type="text" name="direccion" placeholder="Dirección" required />
+        <input type="number" name="precio" placeholder="Precio por hora" required />
+        <textarea name="descripcion" placeholder="Descripción"></textarea>
+        <button type="submit">Agregar</button>
+      </form>
+    </section>
+
+    <section id="mis-cocheras">
+      <h2>Mis Cocheras</h2>
+      <div id="lista-cocheras">
+        <!-- Aquí se cargan cocheras del propietario -->
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/dashboard_propietario.js"></script>
+</body>
+</html>
