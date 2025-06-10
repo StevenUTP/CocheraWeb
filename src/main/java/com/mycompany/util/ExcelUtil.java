@@ -1,46 +1,40 @@
+
 package com.mycompany.util;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import java.io.FileOutputStream;
-import java.io.File;
 import java.io.IOException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtil {
 
-    public static void exportarClientesAExcel(JTable tabla, String nombreArchivo) {
-        Workbook workbook = new XSSFWorkbook();
-        Sheet hoja = workbook.createSheet("Clientes");
+    public static void exportarTablaAExcel(JTable tabla, String nombreArchivo) throws IOException {
+        Workbook libro = new XSSFWorkbook();
+        Sheet hoja = libro.createSheet("Clientes");
 
         TableModel modelo = tabla.getModel();
 
-        Row header = hoja.createRow(0);
+        // Cabecera
+        Row cabecera = hoja.createRow(0);
         for (int i = 0; i < modelo.getColumnCount(); i++) {
-            Cell celda = header.createCell(i);
-            celda.setCellValue(modelo.getColumnName(i));
+            cabecera.createCell(i).setCellValue(modelo.getColumnName(i));
         }
 
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            Row fila = hoja.createRow(i + 1);
-            for (int j = 0; j < modelo.getColumnCount(); j++) {
-                Cell celda = fila.createCell(j);
-                Object valor = modelo.getValueAt(i, j);
-                celda.setCellValue(valor != null ? valor.toString() : "");
+        // Datos
+        for (int fila = 0; fila < modelo.getRowCount(); fila++) {
+            Row filaExcel = hoja.createRow(fila + 1);
+            for (int col = 0; col < modelo.getColumnCount(); col++) {
+                Object valor = modelo.getValueAt(fila, col);
+                filaExcel.createCell(col).setCellValue(valor != null ? valor.toString() : "");
             }
         }
 
-        try {
-            String ruta = "clientes.xlsx"; // Guarda en la misma carpeta del proyecto
-            FileOutputStream fileOut = new FileOutputStream(new File(ruta));
-            workbook.write(fileOut);
-            fileOut.close();
-            workbook.close();
-            System.out.println("✅ Archivo Excel exportado correctamente a: " + ruta);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Escribir archivo
+        try (FileOutputStream salida = new FileOutputStream(nombreArchivo)) {
+            libro.write(salida);
         }
-
+        libro.close();
     }
 }
